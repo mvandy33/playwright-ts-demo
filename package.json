@@ -1,0 +1,17 @@
+{
+	"name": "playwright-ts-demo",
+	"version": "1.0.0",
+	"description": "A basic automated test project to demonstrate Playwright/Typescript/Node capabilities",
+	"main": "index.js",
+	"scripts": {
+		"start": "playwright test",
+		"report": "playwright show-report"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@playwright/test": "^1.48.0",
+		"@types/node": "^22.7.5"
+	}
+}
