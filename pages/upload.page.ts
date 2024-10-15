@@ -6,7 +6,9 @@ const path = 'apps/upload/';
 export default class UploadPage extends PageObject {
 
     fileInput: Locator;
+    uploadButton: Locator;
     numberOfFilesLabel: Locator;
+    uploadedFile: Locator;
 
     /**
      * The page used to test file upload capabilities
@@ -16,7 +18,9 @@ export default class UploadPage extends PageObject {
         super(page);
 
         this.fileInput = page.locator('#file-input');
+        this.uploadButton = page.locator('[class*="btn-green-outline"]');
         this.numberOfFilesLabel = page.locator('#num-of-files');
+        this.uploadedFile = page.locator('[id="images"] figure');
     }
 
     async navigate() {
@@ -32,7 +36,35 @@ export default class UploadPage extends PageObject {
         return 0;
     }
 
-    async uploadFile(file: string) {
-        await this.fileInput.setInputFiles([file]);
+    async uploadFiles(files: string[]) {
+        await this.fileInput.setInputFiles(files);
+    }
+
+    async uploadFilesWithDialog(files: string[]) {
+        let dialogPromise = this.page.waitForEvent('filechooser');
+        await this.uploadButton.click();
+        let dialog = await dialogPromise;
+        await dialog.setFiles(files);
+    }
+
+    async getUploadedFiles() {
+        return (await this.uploadedFile.all()).map(x => new UploadedFile(this.page, x));
+    }
+}
+
+class UploadedFile extends PageObject {
+
+    locator: Locator;
+    nameLabel: Locator;
+
+    constructor(page: Page, locator: Locator) {
+        super(page);
+        this.locator = locator;
+
+        this.nameLabel = this.locator.locator('figcaption');
+    }
+
+    async getFileName() {
+        return await this.nameLabel.innerText();
     }
 }
