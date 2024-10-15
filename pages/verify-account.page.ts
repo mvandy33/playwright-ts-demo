@@ -9,6 +9,10 @@ export default class VerifyAccountPage extends PageObject {
     infoLabel: Locator;
     codeInput: Locator;
 
+    /**
+     * The page used to test account verification
+     * @param page 
+     */
     constructor(page: Page) {
         super(page);
 
