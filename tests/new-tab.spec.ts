@@ -1,7 +1,6 @@
 import test, { expect, Page } from "@playwright/test";
 import NewTabPage from "../pages/new-tab.page";
 import OpenedTabPage from "../pages/opened-tab.page";
-import { getNewTab, getPage } from "../utils/helpers";
 
 const newPagePartialUrl = 'new-page';
 
