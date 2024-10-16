@@ -6,7 +6,15 @@ import * as _ from 'lodash';
  * @param expected 
  * @returns Empty string if equal - string with object descriptions if not equal
  */
-export function compare(actual: object, expected: object) {
+export function compare(actual?: object, expected?: object) {
+    // Ensure nullable objects are defined
+    if (actual == undefined) {
+        throw Error('Cannot compare objects because "actual" was undefined');
+    }
+    if (expected == undefined) {
+        throw Error('Cannot compare objects because "expected" was undefined');
+    }
+
     let pruned = prune(actual, expected);
     if (!_.isEqual(pruned.result1, pruned.result2)) {
         return `${JSON.stringify(pruned.result1, null, 2)}\n\ndid not equal\n\n${JSON.stringify(pruned.result2, null, 2)}`

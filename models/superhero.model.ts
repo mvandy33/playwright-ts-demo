@@ -11,6 +11,6 @@ export default class SuperheroModel {
     }) {
         this.name = info.name;
         this.email = info.email;
-        this.realName = info.realName
-;    }
+        this.realName = info.realName;
+    }
 }

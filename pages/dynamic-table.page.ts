@@ -5,9 +5,9 @@ import ListPageObject from "./abstract/list-page-object";
 import SuperheroModel from "../models/superhero.model";
 import { compare } from "../utils/helpers.util";
 
-const path = 'apps/upload/';
+const path = 'apps/dynamic-table/';
 
-export default class DynamicListPage extends ListPageObject {
+export default class DynamicTablePage extends ListPageObject {
 
     superheroListItem: Locator;
 
@@ -25,7 +25,7 @@ export default class DynamicListPage extends ListPageObject {
         await this.page.goto(path);
     }
 
-    async getSuperheros() {
+    async getSuperheroes() {
         return await this.getPageObjectList(SuperheroListItem, this.superheroListItem);
     }
 
@@ -33,8 +33,11 @@ export default class DynamicListPage extends ListPageObject {
         return await this.getPageObjectMatch(SuperheroListItem, this.superheroListItem, info);
     }
 
-    async getSuperheroByName(name: string) {
-        return await this.getSuperhero(new SuperheroModel({ name: name }));
+    async getSuperheroByName(name?: string) {
+        if (name == undefined) {
+            throw Error('Superhero name cannot be undefined');
+        }
+        return await this.getSuperhero({ name: name });
     }
 }
 
@@ -52,7 +55,7 @@ class SuperheroListItem extends PageObject implements Matchable {
 
         this.nameLabel = locator.locator('[class*="ml-4"] [class*="text-white"]');
         this.emailLabel = locator.locator('[class*="ml-4"] [class*="text-gray"]');
-        this.realNameLabel = locator.locator('[class*="py-4"] [class*="text-white"]');
+        this.realNameLabel = locator.locator('[class*="py-4"] > [class*="text-white"]');
     }
 
     async getInfo() {
