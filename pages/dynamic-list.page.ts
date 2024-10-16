@@ -2,7 +2,8 @@ import { Locator, Page } from "@playwright/test";
 import PageObject from "./abstract/page-object";
 import Matchable from "./abstract/matchable";
 import ListPageObject from "./abstract/list-page-object";
-import SuperheroModel from "../model/superhero.model";
+import SuperheroModel from "../models/superhero.model";
+import { compare } from "../utils/helpers.util";
 
 const path = 'apps/upload/';
 
@@ -74,9 +75,7 @@ class SuperheroListItem extends PageObject implements Matchable {
         return await this.realNameLabel.innerText();
     }
 
-    async isMatch(info: {
-
-    }) {
-        return false;
+    async isMatch(info: SuperheroModel) {
+        return compare(await this.getInfo(), info) === '';
     };
 }
