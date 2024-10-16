@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "playwright test",
 		"report": "playwright show-report",
-    	"vscode-debug": "playwright test --config ./playwright.config.ts --project=chromium --headed"
+		"vscode-debug": "playwright test --config ./playwright.config.ts --project=chromium --headed"
 	},
 	"keywords": [],
 	"author": "",
@@ -14,5 +14,8 @@
 	"devDependencies": {
 		"@playwright/test": "^1.48.0",
 		"@types/node": "^22.7.5"
+	},
+	"dependencies": {
+		"lodash": "^4.17.21"
 	}
 }

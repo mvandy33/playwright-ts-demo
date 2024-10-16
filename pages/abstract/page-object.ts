@@ -6,7 +6,8 @@ export default abstract class PageObject {
 
     /**
      * The abstract class from which all pages should inherit
-     * - Not entirely sure if this will be necessary/useful for Playwright - can be removed if not
+     * - Will be useful if global actions are required before interacting with elements:
+     *   custom waiting, ad removal, etc.
      * @param page 
      */
     constructor(page: Page) {
