@@ -5,10 +5,10 @@ import PageObject from "./page-object";
 export default abstract class ListPageObject extends PageObject {
     /**
      * Class to extend when the inheriting page object needs to operate on a list of elements
-     * @param finder 
+     * @param page 
      */
-    constructor(finder: Page | Locator) {
-        super(finder);
+    constructor(page: Page) {
+        super(page);
     }
 
     /**
@@ -17,9 +17,9 @@ export default abstract class ListPageObject extends PageObject {
      * @param locator the parent element locator for each list item
      * @returns
      */
-    async getPageObjectList<T extends Matchable>(Type: new (locator: Locator) => T, locator: Locator): Promise<T[]> {
+    async getPageObjectList<T extends Matchable>(Type: new (page: Page, locator: Locator) => T, locator: Locator): Promise<T[]> {
         let elements = await locator.all();
-        return elements.map(el => new Type(el));
+        return elements.map(el => new Type(this.page, el));
     }
 
     /**
@@ -29,7 +29,7 @@ export default abstract class ListPageObject extends PageObject {
      * @param locator 
      * @param info
      */
-    async getPageObjectMatch<T extends Matchable>(Type: new (locator: Locator) => T, locator: Locator, info: object) {
+    async getPageObjectMatch<T extends Matchable>(Type: new (page: Page, locator: Locator) => T, locator: Locator, info: object) {
         let list = await this.getPageObjectList(Type, locator);
         for (let matchable of list) {
             if (await matchable.isMatch(info)) {
