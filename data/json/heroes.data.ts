@@ -1,4 +1,4 @@
-import SuperheroModel from "../../../models/superhero.model";
+import SuperheroModel from "../../models/superhero.model";
 
 export default {
     ironMan: new SuperheroModel({

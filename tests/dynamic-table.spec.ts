@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 import DynamicTablePage from "../pages/dynamic-table.page";
-import heroesData from "../data/img/json/heroes.data";
+import heroesData from "../data/json/heroes.data";
 import { compare } from "../utils/helpers.util";
 
 test.describe('Dynamic table demo', () => {
