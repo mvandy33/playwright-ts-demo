@@ -54,21 +54,18 @@ export default class UploadPage extends PageObject {
 
 class UploadedFile extends PageObject {
 
-    locator: Locator;
     nameLabel: Locator;
 
     /**
      * A single uploaded file element
      * - This is a bit over-engineered, but serves the purpose of illustrating how a list
      *   with complex children could be handled
-     * @param page 
      * @param locator 
      */
-    constructor(page: Page, locator: Locator) {
-        super(page);
-        this.locator = locator;
+    constructor(locator: Locator) {
+        super(locator);
 
-        this.nameLabel = this.locator.locator('figcaption');
+        this.nameLabel = locator.locator('figcaption');
     }
 
     async getFileName() {

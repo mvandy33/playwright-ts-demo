@@ -1,15 +1,16 @@
-import { Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export default abstract class PageObject {
 
-    page: Page;
+    finder: Page | Locator;
 
     /**
      * The abstract class from which all pages should inherit
-     * - Not entirely sure if this will be necessary/useful for Playwright - can be removed if not
-     * @param page 
+     * - Will be useful if global actions are required before interacting with elements:
+     *   custom waiting, ad removal, etc.
+     * @param finder 
      */
-    constructor(page: Page) {
-        this.page = page;
+    constructor(finder: Page | Locator) {
+        this.finder = finder;
     }
 }
